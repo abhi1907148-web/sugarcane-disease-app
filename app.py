@@ -34,3 +34,18 @@ if uploaded_file is not None:
 
     st.success(f"Prediction: {predicted_class}")
     st.info(f"Confidence: {confidence:.2f}%")
+
+    img = image.resize((224, 224))
+    img_array = np.array(img, dtype=np.float32)
+    img_array = (img_array / 127.5) - 1.0
+    img_array = np.expand_dims(img_array, axis=0)
+
+    interpreter.set_tensor(input_details[0]['index'], img_array)
+    interpreter.invoke()
+    output = interpreter.get_tensor(output_details[0]['index'])
+
+    predicted_class = class_names[np.argmax(output)]
+    confidence = np.max(output) * 100
+
+    st.success(f"Prediction: {predicted_class}")
+    st.info(f"Confidence: {confidence:.2f}%")
