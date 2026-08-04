@@ -10,7 +10,7 @@ st.write("Upload a sugarcane leaf image to detect disease")
 current_dir = os.path.dirname(os.path.abspath(__file__))
 st.write("Files found in app folder:", os.listdir(current_dir))
 
-model_path = os.path.join(current_dir, "sugarcane_mobilenetv2.tflite")
+model_path = os.path.join(current_dir, "sugarcane_ResNet50.tflite")
 
 if not os.path.exists(model_path):
     st.error(f"Model file not found at: {model_path}")
